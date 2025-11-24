@@ -17,6 +17,7 @@ class _MasjidlistState extends State<Masjidlist> {
   late int rating = widget.masjids!.first.ratings;
   bool liked = false;
   bool disliked = false;
+  String review = "";
   List<String> salawat = ["Fajr", "Dhuhur", "Asr", "Maghrib", "Isha"];
   @override
   Widget build(BuildContext context) {
@@ -165,6 +166,39 @@ class _MasjidlistState extends State<Masjidlist> {
                       ],
                     ),
                   ),
+                  Text(
+                    "This is your current review: \n $review",
+                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
+                    textAlign: TextAlign.center,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextField(
+                          decoration: InputDecoration(
+                            labelText: "You can leave a review here..",
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (text) {
+                            setState(() {
+                              updateText(text);
+                            });
+                          },
+                        ),
+                        SizedBox(height: 25),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text("Submit", style: TextStyle(fontSize: 24)),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.indigo[500],
+                            foregroundColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -172,6 +206,12 @@ class _MasjidlistState extends State<Masjidlist> {
         ),
       ),
     );
+  }
+
+  void updateText(String text) {
+    setState(() {
+      review = text;
+    });
   }
 }
 
